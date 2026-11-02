@@ -50,6 +50,7 @@ stdenvNoCC.mkDerivation {
       --set SOLDEER_PURIFIER_REALIZE "$out/lib/soldeer-purifier/nix/realize.nix" \
       --set-default SSL_CERT_FILE ${cacert}/etc/ssl/certs/ca-bundle.crt
     makeWrapper "$out/bin/soldeer-purifier" "$out/bin/forge" --add-flags "native --"
+    ln -s ${vscode-solidity-server}/bin/vscode-solidity-server "$out/bin/vscode-solidity-server"
   '';
   meta = {
     description = "Locked, Nix-resolved Solidity dependencies";
