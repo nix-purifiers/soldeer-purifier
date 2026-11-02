@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+from soldeer_purifier.cli import main
+main()

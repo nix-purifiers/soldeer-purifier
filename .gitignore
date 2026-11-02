@@ -1,0 +1,9 @@
+result*
+.soldeer-purifier/
+dependencies/
+out/
+cache/
+broadcast/
+__pycache__/
+*.pyc
+*.log
