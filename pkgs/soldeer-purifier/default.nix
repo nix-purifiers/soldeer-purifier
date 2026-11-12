@@ -18,12 +18,12 @@
 stdenvNoCC.mkDerivation {
   pname = "soldeer-purifier";
   version = "0.1.0";
-  src = ../.;
+  src = ../..;
   nativeBuildInputs = [ makeWrapper ];
   dontBuild = true;
   installPhase = ''
     mkdir -p "$out/bin" "$out/lib/soldeer-purifier"
-    cp -r soldeer_purifier nix "$out/lib/soldeer-purifier/"
+    cp -r soldeer_purifier nix lib-overlays pkgs "$out/lib/soldeer-purifier/"
     install -m755 bin/soldeer-purifier "$out/bin/soldeer-purifier"
     substituteInPlace "$out/lib/soldeer-purifier/nix/realize.nix" \
       --replace-fail '@nixpkgs@' '${nixpkgsSrc}' \
