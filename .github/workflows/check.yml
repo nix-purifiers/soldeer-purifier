@@ -18,6 +18,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
       - run: nix flake check -L
       - run: tests/conformance-rebuild.sh
+      - run: python3 tests/contract-negative.py
   conformance:
     name: conformance-${{ matrix.case }} (${{ matrix.runner }})
     strategy:

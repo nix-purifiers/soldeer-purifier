@@ -146,6 +146,58 @@ soldeer-purifier publish \
 `lib.soldeer-purifier.readLock` reads the native TOML and companion JSON during
 Nix evaluation, without import-from-derivation.
 
+### Contract resources and language packages
+
+Select a production contract using its native source and contract identity:
+
+```nix
+pkgs.soldeer-purifier.buildSoldeerProject {
+  src = ./.;
+  contractTargets.counter = {
+    source = "src/Counter.sol";
+    contract = "Counter";
+    webjar = {
+      groupId = "org.webjars.solidity";
+      artifactId = "counter";
+      version = "1.0.0";
+    };
+    npm = { name = "@my-project/counter"; version = "1.0.0"; };
+    python = {
+      name = "counter-abi";
+      version = "1.0.0";
+      module = "counter_abi";
+    };
+  };
+}
+```
+
+`artifacts.counter` and `packages.contract-counter` contain the exact native
+Forge artifact as `contract.json`, selected `abi.json`, `bytecode.json` and
+`deployed-bytecode.json`, plus `main.mjs` and its TypeScript declarations.
+The ESM module exports `abi`, `bytecode`, `deployedBytecode`, both native link
+reference maps, and compiler/source/contract identities. Link references remain
+available for contracts that require library linking before deployment.
+
+The selector checks Forge's compilation target against the declared production
+source, verifies every native compiler source Keccak hash, and records source
+ownership through the captured dependencies. Test and dependency contracts
+cannot be selected as project contracts. `artifacts.counter.proof` retains source
+and compiler evidence separately; `packages.contracts` retains the native Forge
+output tree, and its compiled release archive contains that tree.
+
+`projections.counter.web` exposes HTTP files and `resources.jar` for ordinary
+Java class loaders. Optional WebJar coordinates add Maven/Ivy repositories.
+Optional npm coordinates add `projections.counter.npm`: an ordinary native
+`npm pack` library with ESM exports and TypeScript types. Optional Python
+coordinates build a native setuptools wheel and add `projections.counter.python`.
+The Python module exposes `abi`, `bytecode`, `deployed_bytecode`, both link
+reference maps and the original `contract` document for consumers such as Web3.
+`artifacts.counter.npmArchive` and `.pythonWheel` retain native packages.
+
+Projected versions include the producer identity, so independently compiled
+source revisions remain distinct even when the declared version stays the same.
+These packages contain EVM contract data for native client SDKs.
+
 ## Credits
 
 The purifier idea was inspired by nixcloud's

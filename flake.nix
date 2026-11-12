@@ -3,7 +3,7 @@
   description = "Locked, Nix-resolved dependencies for Soldeer";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.purifier = {
-    url = "github:nix-purifiers/purifier";
+    url = "github:nix-purifiers/purifier/v0.1.63";
     flake = false;
   };
   outputs =

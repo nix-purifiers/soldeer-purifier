@@ -46,6 +46,7 @@ in
   package = project.packages.contracts;
   offline = project.tests;
   release = project.release;
+  contracts = import ./contracts.nix { inherit pkgs; };
   editor =
     pkgs.runCommand "soldeer-editor"
       {
