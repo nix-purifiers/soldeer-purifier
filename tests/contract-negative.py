@@ -54,7 +54,7 @@ library TestHelper { function answer() internal pure returns (uint256) { return 
     config.write_text(subprocess.check_output([str(Path(native['cast']).with_name('forge')), 'config', '--json'], cwd=source, text=True))
     specs = temporary / 'targets.json'
     specs.write_text(json.dumps({'bad': {'source': 'src/Counter.sol', 'contract': 'Counter'}}))
-    result = subprocess.run(['python3', str(repo / 'nix/contract-output.py'), str(source), str(baseline), str(config),
+    result = subprocess.run(['python3', str(repo / 'pkgs/build-soldeer-project/contract-output.py'), str(source), str(baseline), str(config),
         str(specs), str(temporary / 'selected'), native['cast'], native['version']], capture_output=True, text=True)
     assert result.returncode != 0 and 'native compiler source hash mismatch' in result.stderr, result
     print(json.dumps({'case': 'stale-native-artifact-for-changed-source', 'exitCode': result.returncode,

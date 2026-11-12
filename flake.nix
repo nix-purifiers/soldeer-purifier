@@ -21,11 +21,11 @@
       shared = lib: import (purifier + "/nix/lib") { inherit lib; };
       overlay = final: prev: {
         soldeer-purifier = final.lib.makeScope final.newScope (scope: {
-          cli = scope.callPackage ./nix/cli.nix {
+          cli = scope.callPackage ./pkgs/soldeer-purifier/default.nix {
             nixpkgsSrc = nixpkgs;
             purifierSrc = purifier;
           };
-          buildSoldeerProject = scope.callPackage ./nix/build-project.nix { purifier = shared final.lib; };
+          buildSoldeerProject = scope.callPackage ./pkgs/build-soldeer-project/default.nix { purifier = shared final.lib; };
         });
       };
       pkgsFor =
@@ -37,7 +37,7 @@
     in
     {
       overlays.default = overlay;
-      lib.soldeer-purifier.readLock = import ./nix/read-lock.nix { lib = nixpkgs.lib; };
+      lib.soldeer-purifier = import ./lib-overlays/default { lib = nixpkgs.lib; };
       packages = forAll (system: {
         default = (pkgsFor system).soldeer-purifier.cli;
         cli = self.packages.${system}.default;

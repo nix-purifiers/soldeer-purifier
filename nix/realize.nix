@@ -8,7 +8,7 @@
 let
   pkgs = import (builtins.toPath "@nixpkgs@") { };
   purifier = import (builtins.toPath "@purifier@/nix/lib") { inherit (pkgs) lib; };
-  result = pkgs.callPackage ./build-project.nix { inherit purifier; } {
+  result = pkgs.callPackage ../pkgs/build-soldeer-project/default.nix { inherit purifier; } {
     src = /. + project;
     lockFile = /. + lockFile;
     soldeerLock = /. + soldeerLock;

@@ -33,7 +33,7 @@
 }:
 let
   lock = purifier.checkLock (
-    (import ./read-lock.nix { inherit lib; }) { inherit src lockFile soldeerLock; }
+    (import ../../lib-overlays/default/read-lock.nix { inherit lib; }) { inherit src lockFile soldeerLock; }
   );
   dependencies = callPackage ./dependencies.nix { inherit purifier; } { inherit lock fetchers; };
   source = lib.cleanSourceWith {
