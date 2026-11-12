@@ -1,0 +1,16 @@
+{
+  "contentHash": "f599950b02c42c7289647ac4afc84059d256e721e85754dfb4496371b016d633",
+  "dependencies": {
+    "forge-std-1.11.0": {
+      "stripTop": false
+    }
+  },
+  "forgeVersion": "1.8.4",
+  "inputs": {
+    "foundry.toml": "92668228f35d27ef4316bff07599113f7102343b469cbb2c97b24e830c9d40fb",
+    "remappings.txt": "5877ef7aaf0565b3bfb55d1b184dbae74c811391bdbfefe4c61ff20052ac98fa"
+  },
+  "nativeHash": "8a76e2e277601b57ef4bdc2e2d3962beef2d2e4813ded6b09f2337e4ad08a9c5",
+  "solcVersion": "0.8.33",
+  "version": 1
+}

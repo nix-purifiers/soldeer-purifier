@@ -5,3 +5,4 @@ nix build ".#checks.${system}.package" --no-link
 nix build ".#checks.${system}.package" --no-link --rebuild
 nix build ".#checks.${system}.release" --no-link
 nix build ".#checks.${system}.release" --no-link --rebuild
+nix build ".#checks.${system}.contracts" --no-link --rebuild
